@@ -7,7 +7,30 @@
 </head>
 <body>
     <iframe id="ytplayer" type="text/html" width="640" height="390"
-        src="https://www.youtube.com/embed/videoseries?list=PLNihIFYUdex1i9VcU2GuEaQEvovvEPafQ&autoplay=1&loop=1"
+        src="https://www.youtube.com/embed/videoseries?list=PLNihIFYUdex1i9VcU2GuEaQEvovvEPafQ&autoplay=1&loop=1&playlist=PLNihIFYUdex1i9VcU2GuEaQEvovvEPafQ"
         frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+    <script>
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('ytplayer', {
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                event.target.playVideo();
+            }
+        }
+    </script>
+    <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
