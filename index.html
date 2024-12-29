@@ -1,1 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+</head>
+<body>
+    <audio id="audioPlayer" controls autoplay loop>
+        <source src="audio/shirdi sai baba vibhuti mantra in Telugu(MP3_160K).mp3" type="audio/mpeg">
+        <!-- Add more songs as needed -->
+        Your browser does not support the audio element.
+    </audio>
 
+    <script>
+        var audioPlayer = document.getElementById('audioPlayer');
+        var audioSources = [
+            'audio/your_song.mp3'
+            // Add more songs as needed
+        ];
+        var currentSong = 0;
+
+        audioPlayer.addEventListener('ended', function() {
+            currentSong = (currentSong + 1) % audioSources.length;
+            audioPlayer.src = audioSources[currentSong];
+            audioPlayer.play();
+        });
+
+        // Function to play a single song in a loop for 24 hours
+        function playSingleSongLoop(song) {
+            audioPlayer.src = 'audio/' + song;
+            audioPlayer.loop = true;
+            audioPlayer.play();
+        }
+
+        // Example: Play 'your_song.mp3' in a loop for 24 hours
+        playSingleSongLoop('your_song.mp3');
+    </script>
+</body>
+</html>
